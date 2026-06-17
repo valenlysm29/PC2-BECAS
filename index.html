@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Programa de Becas — Registro de Postulantes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="brand">
+      <div class="brand__mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FBF8F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/>
+          <path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/>
+        </svg>
+      </div>
+      <div>
+        <p class="brand__text-eyebrow">Programa de becas 2026</p>
+        <p class="brand__text-title">Registro de Postulantes</p>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="#formulario">Nueva postulación</a>
+      <a href="#listado">Postulantes registrados</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="hero__eyebrow">Convocatoria abierta</p>
+    <h1>Cada postulación es un <em>paso</em> hacia una nueva oportunidad académica.</h1>
+    <p>Completa el formulario para registrar a un postulante a la beca. La información se valida y se guarda directamente en la base de datos del programa.</p>
+  </div>
+  <div class="hero__stats">
+    <div>
+      <div class="hero__stat-value" id="stat-total">—</div>
+      <div class="hero__stat-label">Postulantes registrados</div>
+    </div>
+    <div>
+      <div class="hero__stat-value">6</div>
+      <div class="hero__stat-label">Carreras disponibles</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FORMULARIO ===================== -->
+<section class="section" id="formulario">
+  <div class="section__head">
+    <div class="section__head-text">
+      <h2><span class="section__number">01</span>Nueva postulación</h2>
+      <p>Todos los campos son obligatorios excepto observaciones.</p>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form id="form-postulante" novalidate>
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="nombres">Nombres</label>
+          <input type="text" id="nombres" name="nombres" placeholder="Ej. María Fernanda" autocomplete="given-name" />
+          <span class="field-error" id="error-nombres"></span>
+        </div>
+
+        <div class="field">
+          <label for="apellidos">Apellidos</label>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ej. Quispe Rojas" autocomplete="family-name" />
+          <span class="field-error" id="error-apellidos"></span>
+        </div>
+
+        <div class="field">
+          <label for="dni">DNI</label>
+          <input type="text" id="dni" name="dni" placeholder="8 dígitos" inputmode="numeric" maxlength="8" />
+          <span class="field-error" id="error-dni"></span>
+        </div>
+
+        <div class="field">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" placeholder="nombre@correo.com" autocomplete="email" />
+          <span class="field-error" id="error-correo"></span>
+        </div>
+
+        <div class="field">
+          <label for="celular">Celular</label>
+          <input type="text" id="celular" name="celular" placeholder="9XXXXXXXX" inputmode="numeric" maxlength="9" />
+          <span class="field-error" id="error-celular"></span>
+        </div>
+
+        <div class="field">
+          <label for="edad">Edad</label>
+          <input type="number" id="edad" name="edad" placeholder="Ej. 19" min="14" max="99" />
+          <span class="field-error" id="error-edad"></span>
+        </div>
+
+        <div class="field">
+          <label for="sexo_id">Sexo</label>
+          <select id="sexo_id" name="sexo_id">
+            <option value="">Selecciona…</option>
+            <!-- Opciones cargadas dinámicamente desde Supabase (tabla: sexos) -->
+          </select>
+          <span class="field-error" id="error-sexo_id"></span>
+        </div>
+
+        <div class="field">
+          <label for="institucion_educativa">Institución educativa</label>
+          <input type="text" id="institucion_educativa" name="institucion_educativa" placeholder="Ej. IE José María Arguedas" />
+          <span class="field-error" id="error-institucion_educativa"></span>
+        </div>
+
+        <div class="field">
+          <label for="promedio_academico">Promedio académico <span class="opt">(escala 0–20)</span></label>
+          <input type="number" id="promedio_academico" name="promedio_academico" placeholder="Ej. 16.5" min="0" max="20" step="0.1" />
+          <span class="field-error" id="error-promedio_academico"></span>
+        </div>
+
+        <div class="field">
+          <label for="grado_academico_id">Grado académico actual</label>
+          <select id="grado_academico_id" name="grado_academico_id">
+            <option value="">Selecciona…</option>
+            <!-- Opciones cargadas dinámicamente desde Supabase (tabla: grados_academicos) -->
+          </select>
+          <span class="field-error" id="error-grado_academico_id"></span>
+        </div>
+
+        <div class="field">
+          <label for="carrera_interes_id">Carrera de interés</label>
+          <select id="carrera_interes_id" name="carrera_interes_id">
+            <option value="">Selecciona…</option>
+            <!-- Opciones cargadas dinámicamente desde Supabase (tabla: carreras_interes) -->
+          </select>
+          <span class="field-error" id="error-carrera_interes_id"></span>
+        </div>
+
+        <div class="field">
+          <label for="modalidad_estudio_id">Modalidad de estudio</label>
+          <select id="modalidad_estudio_id" name="modalidad_estudio_id">
+            <option value="">Selecciona…</option>
+            <!-- Opciones cargadas dinámicamente desde Supabase (tabla: modalidades_estudio) -->
+          </select>
+          <span class="field-error" id="error-modalidad_estudio_id"></span>
+        </div>
+
+        <div class="field field--full">
+          <label for="observaciones">Observaciones <span class="opt">(opcional)</span></label>
+          <textarea id="observaciones" name="observaciones" placeholder="Información adicional relevante para la evaluación…"></textarea>
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+        <span class="form-footer__note">Los datos se guardan de forma segura en la base del programa de becas.</span>
+        <div style="display:flex; gap:10px;">
+          <button type="reset" class="btn btn-ghost">Limpiar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit">Registrar postulación</button>
+        </div>
+      </div>
+
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== LISTADO ===================== -->
+<section class="section" id="listado">
+  <div class="section__head">
+    <div class="section__head-text">
+      <h2><span class="section__number">02</span>Postulantes registrados</h2>
+      <p>Consulta a todos los postulantes registrados en el programa y filtra por sexo.</p>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="filter-group">
+      <label for="filtro-sexo">Filtrar por sexo</label>
+      <select id="filtro-sexo">
+        <option value="">Todos</option>
+        <!-- Opciones cargadas dinámicamente desde Supabase (tabla: sexos) -->
+      </select>
+    </div>
+    <span class="result-count" id="result-count">—</span>
+  </div>
+
+  <div id="loading-state" class="loading-state">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <h3>Aún no hay postulantes</h3>
+    <p>Los registros aparecerán aquí en cuanto se complete el formulario.</p>
+  </div>
+
+  <div class="table-card" id="table-card" style="display:none;">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Correo</th>
+            <th>Celular</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Grado académico</th>
+            <th>Carrera de interés</th>
+            <th>Modalidad</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  Programa de Becas · Registro de Postulantes — Datos almacenados en Supabase
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
